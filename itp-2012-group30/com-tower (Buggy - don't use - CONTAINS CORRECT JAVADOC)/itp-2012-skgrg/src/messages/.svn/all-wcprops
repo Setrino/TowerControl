@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/com-itp-planes-sk/!svn/ver/13/com-itp-2012-sg/itp-2012-skgrg/src/messages
+END
+Bye.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/com-itp-planes-sk/!svn/ver/8/com-itp-2012-sg/itp-2012-skgrg/src/messages/Bye.java
+END
+MessageHandlerVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/com-itp-planes-sk/!svn/ver/8/com-itp-2012-sg/itp-2012-skgrg/src/messages/MessageHandlerVisitor.java
+END
+MoveType.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/MoveType.java
+END
+UnChoke.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/UnChoke.java
+END
+MessageReader.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/com-itp-planes-sk/!svn/ver/8/com-itp-2012-sg/itp-2012-skgrg/src/messages/MessageReader.java
+END
+Data.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/Data.java
+END
+KeepAlive.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/KeepAlive.java
+END
+SendRSAKey.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/SendRSAKey.java
+END
+Message.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/com-itp-planes-sk/!svn/ver/12/com-itp-2012-sg/itp-2012-skgrg/src/messages/Message.java
+END
+Choke.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/Choke.java
+END
+MessageHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/com-itp-planes-sk/!svn/ver/13/com-itp-2012-sg/itp-2012-skgrg/src/messages/MessageHandler.java
+END
+InternalUpdateMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/InternalUpdateMessage.java
+END
+MessageType.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/MessageType.java
+END
+RoutingMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/com-itp-planes-sk/!svn/ver/13/com-itp-2012-sg/itp-2012-skgrg/src/messages/RoutingMessage.java
+END
+MessageSender.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/com-itp-planes-sk/!svn/ver/12/com-itp-2012-sg/itp-2012-skgrg/src/messages/MessageSender.java
+END
+InternalQuitMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/InternalQuitMessage.java
+END
+RoutingMessageType.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/RoutingMessageType.java
+END
+LandingRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/LandingRequest.java
+END
+MayDay.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/MayDay.java
+END
+Hello.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/messages/Hello.java
+END

@@ -1,0 +1,98 @@
+10
+
+dir
+13
+https://svn.epfl.ch/svn/com-itp-planes-sk/com-itp-2012-sg/bin
+https://svn.epfl.ch/svn/com-itp-planes-sk
+
+
+
+2012-05-19T11:56:32.207962Z
+13
+kostevit
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b2ade4ae-4c20-40fe-b92d-eab1aeb48b7e
+
+crypto
+dir
+
+
+
+delete
+
+exceptions
+dir
+
+
+
+delete
+
+file
+dir
+
+
+
+delete
+
+gui
+dir
+
+
+
+delete
+
+messages
+dir
+
+
+
+delete
+
+plane
+dir
+
+
+
+delete
+
+routing
+dir
+
+
+
+delete
+
+tests
+dir
+
+
+
+delete
+
+tower
+dir
+
+
+
+delete
+
+twitter
+dir
+
+
+
+delete
+

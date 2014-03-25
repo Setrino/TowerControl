@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/com-itp-planes-sk/!svn/ver/12/com-itp-2012-sg/itp-2012-skgrg/src/plane
+END
+Plane.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/com-itp-planes-sk/!svn/ver/9/com-itp-2012-sg/itp-2012-skgrg/src/plane/Plane.java
+END
+PlaneType.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/plane/PlaneType.java
+END
+CircleType.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/plane/CircleType.java
+END
+PlaneAccepter.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/plane/PlaneAccepter.java
+END
+PlaneRouting.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/com-itp-planes-sk/!svn/ver/12/com-itp-2012-sg/itp-2012-skgrg/src/plane/PlaneRouting.java
+END
+PlaneHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/com-itp-planes-sk/!svn/ver/12/com-itp-2012-sg/itp-2012-skgrg/src/plane/PlaneHandler.java
+END

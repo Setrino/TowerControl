@@ -1,0 +1,58 @@
+10
+
+dir
+12
+https://svn.epfl.ch/svn/com-itp-planes-sk/com-itp-2012-sg/itp-2012-skgrg/src
+https://svn.epfl.ch/svn/com-itp-planes-sk
+
+
+
+2012-05-17T15:22:47.188939Z
+12
+kostevit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b2ade4ae-4c20-40fe-b92d-eab1aeb48b7e
+
+file
+dir
+
+plane
+dir
+
+crypto
+dir
+
+tower
+dir
+
+exceptions
+dir
+
+tests
+dir
+
+twitter
+dir
+
+gui
+dir
+
+messages
+dir
+
+routing
+dir
+

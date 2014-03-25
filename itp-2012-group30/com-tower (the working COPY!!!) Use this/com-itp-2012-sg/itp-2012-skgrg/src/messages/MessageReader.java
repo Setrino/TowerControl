@@ -1,0 +1,250 @@
+/*
+ * Sergei Kostevitch
+ * Feb 28, 2012
+ */
+
+package messages;
+
+import java.awt.Point;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import plane.Plane;
+import tower.Tower;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MessageReader.
+ */
+public class MessageReader {
+
+	/** The message handler. */
+	private MessageHandler messageHandler = MessageHandler
+			.getMessageHandlerInstance();
+
+	/** The data input stream. */
+	private DataInputStream dataInputStream = null;
+
+	/** The type. */
+	private MessageType type;
+
+	/** The plane id. */
+	private byte[] planeID = new byte[8];
+
+	/** The pos x. */
+	private int posX;
+
+	/** The pos y. */
+	private int posY;
+
+	/** The plane name. */
+	private String planeIdString;
+	// private byte[] messageBody;
+	/** The length. */
+	private int length;
+
+	/** The message priority. */
+	private int messagePriority;
+	// for Hello message
+	/** The reserved. */
+	private byte reserved;
+
+	/** The string array. */
+	private String[][] stringArray;
+	// Create the first byte array to read the 28 bytes, and then determine what
+	// type of message it is
+	// and read onwards for each case
+	/** The read standard28 bytes. */
+	private byte[] readStandard28Bytes;
+
+	private Plane plane = null;
+
+	private Tower tower;
+
+	private int landingRequestsCounter = 0;
+
+	private boolean firstTxtFile = true;
+
+	/**
+	 * Instantiates a new message reader.
+	 */
+	public MessageReader() {
+
+		tower = Tower.getTowerInstance();
+	}
+
+	/**
+	 * Read the message, set the new Point of the Plane
+	 * 
+	 * @param inputStream
+	 *            the input stream
+	 * @return the message
+	 */
+	public Message readMessage(InputStream inputStream) {
+
+		dataInputStream = new DataInputStream(inputStream);
+		Message message = null;
+
+		int messageTypeValue = 0;
+
+		try {
+
+			/*
+			 * readStandard28Bytes = new byte[28];
+			 * dataInputStream.read(readStandard28Bytes);
+			 * 
+			  for (int j = 0; j < 4; j++) {
+			  
+			  messageTypeValue |= (readStandard28Bytes[j + 24] & 0xFF) << 24 -
+			  j * 8; }
+			 * 
+			 * System.out.println(messageTypeValue);
+			 * 
+			 * for (int i = 0; i < 8; i++) {
+			 * 
+			 * planeID[i] = readStandard28Bytes[i];
+			 * 
+			 * } planeIdString = new String(planeID);
+			 * 
+			 * System.out.println(planeIdString);
+			 * 
+			 * type = MessageType.values()[messageTypeValue];
+			 * 
+			 * for (int j = 0; j < 4; j++) { length |= (readStandard28Bytes[j +
+			 * 8] & 0xFF) << 24 - j * 8; messagePriority |=
+			 * (readStandard28Bytes[j + 12] & 0xFF) << 24 - j * 8; posX |=
+			 * (readStandard28Bytes[j + 16] & 0xFF) << 24 - j * 8; posY |=
+			 * (readStandard28Bytes[j + 20] & 0xFF) << 24 - j * 8; }
+			 */
+
+			dataInputStream.read(planeID);
+			planeIdString = new String(planeID);
+			length = dataInputStream.readInt();
+			messagePriority = dataInputStream.readInt();
+			posX = dataInputStream.readInt();
+			posY = dataInputStream.readInt();
+			byte[] tempA = new byte[4];
+			dataInputStream.read(tempA);
+			messageTypeValue = ((tempA[0] & 0xff) << 24)
+					| ((tempA[1] & 0xff) << 16) | ((tempA[2] & 0xff) << 8)
+					| (tempA[3] & 0xff);
+			type = MessageType.values()[messageTypeValue];
+
+			plane.setPosX(posX);
+			plane.setPosY(posY);
+			plane.setPoint(new Point(posX, posY));
+			tower.setPlanePosition(planeIdString, new Point(posX, posY));
+
+			switch (type) {
+			case HELLO:
+
+				reserved = dataInputStream.readByte();
+
+				message = new Hello(planeID, posX, posY, reserved);
+
+				stringArray = message.generateArrayStringXML(planeIdString,
+						"Tower");
+
+				messageHandler.visit((Hello) message, planeIdString, "Tower",
+						stringArray);
+				break;
+			case DATA:
+
+				byte[] hash = new byte[20];
+				dataInputStream.read(hash);
+				int pieceIndex = dataInputStream.readInt();
+				byte[] format = new byte[4];
+				dataInputStream.read(format);
+				int fileSize = dataInputStream.readInt();
+				byte[] payload = new byte[length];
+				dataInputStream.read(payload);
+
+				message = new Data(planeID, pieceIndex, posX, posY, hash,
+						format, fileSize, payload);
+
+				messageHandler.visit((Data) message, planeIdString, "Tower",
+						plane, this, firstTxtFile);
+
+				break;
+			case MAYDAY:
+
+				break;
+			case SENDRSA:
+
+				System.out.println("SendRSA received");
+
+				int keySize = dataInputStream.readInt();
+				int modulusLength = dataInputStream.readInt();
+				byte[] modulus = new byte[modulusLength];
+				dataInputStream.read(modulus);
+				int publicKeyLength = dataInputStream.readInt();
+				byte[] publicKey = new byte[publicKeyLength];
+				dataInputStream.read(publicKey);
+
+				message = new SendRSAKey(planeID, posX, posY, keySize,
+						modulusLength, modulus, publicKeyLength, publicKey);
+
+				messageHandler.visit((SendRSAKey) message, planeIdString,
+						"Tower");
+
+				break;
+			case CHOKE:
+
+				break;
+			case UNCHOKE:
+
+				break;
+			case BYE:
+
+				message = new Bye(planeID);
+
+				messageHandler.visit((Bye) message, planeIdString, "Tower",
+						plane);
+
+				break;
+			case ROUTING:
+
+				break;
+			case KEEPALIVE:
+
+				message = new KeepAlive(planeID, posX, posY);
+
+				messageHandler.visit((KeepAlive) message, planeIdString,
+						"Tower");
+
+				break;
+			case LANDINGREQUEST:
+
+				message = new LandingRequest(planeID, posX, posY);
+
+				messageHandler.visit((LandingRequest) message, planeIdString,
+						"Tower");
+
+				landingRequestsCounter++;
+
+				tower.addLandingRequestPerPlane(plane);
+
+				break;
+
+			default:
+				break;
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return message;
+	}
+
+	public void setPlane(Plane plane) {
+		this.plane = plane;
+	}
+
+	public void setFirstTxtFile(boolean firstTxtFile) {
+		this.firstTxtFile = firstTxtFile;
+	}
+
+}

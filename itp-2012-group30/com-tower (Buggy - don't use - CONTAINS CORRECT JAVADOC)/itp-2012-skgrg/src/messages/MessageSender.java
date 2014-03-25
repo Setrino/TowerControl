@@ -1,0 +1,145 @@
+/*
+ * Sergei Kostevitch
+ * Mar 10, 2012
+ */
+
+package messages;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.LinkedList;
+import java.util.List;
+
+import plane.Plane;
+import plane.PlaneRouting;
+
+import tower.Tower;
+
+/**
+ * The Class MessageSender used for sending messages to a specific plane.
+ * The Plane instance each has its own MessageSender, and when given
+ *  a message to send, redirects it here which contains the OutPutStream.
+ */
+public class MessageSender extends Thread {
+
+	/** The priority queue. */
+	private List<Message> messagesList;
+
+	/** The byte output stream. */
+	private ByteArrayOutputStream byteOutputStream;
+
+	/** The output stream. */
+	private OutputStream outputStream;
+	
+	private PlaneRouting planeRouting = null;
+
+	/** The tower. */
+	private Tower tower;
+	
+	private Plane plane;
+
+	/**
+	 * Instantiates a new message sender.
+	 * 
+	 * @param outputStream
+	 *            the output stream
+	 */
+	public MessageSender(OutputStream outputStream, Plane plane) {
+
+		messagesList = new LinkedList<Message>();
+		tower = Tower.getTowerInstance();
+		this.outputStream = outputStream;
+		this.plane = plane;
+		byteOutputStream = new ByteArrayOutputStream();
+	}
+
+	/**
+	 * Adds the message to queue of messagesList.
+	 * 
+	 * @param message
+	 *            the message
+	 */
+	public synchronized void addMessageToQueue(Message message) {
+
+		messagesList.add(message);
+		
+	}
+
+	
+	 /**
+	  * If the list of messages is not empty, the message is sent to
+	  * the OutputStream. Otherwise it waits.
+	  */
+	
+	public void run() {
+
+		while (true) {
+
+			try {
+
+				if (messagesList.size() != 0) {
+				
+					messagesList.get(0).sendMessage(byteOutputStream);
+					messagesList.remove(0);
+					
+					if (byteOutputStream.size() != 0) {
+						byteOutputStream.writeTo(outputStream);
+						byteOutputStream.flush();
+						byteOutputStream.reset();
+						outputStream.flush();
+					}
+				} else {
+						
+					Thread.sleep(100);
+					yield();
+					
+				}
+
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				
+				plane.setCrashedStatus(true);
+				tower.removePlaneFromAllLists(plane);
+				tower.globalTowerRouting();
+				System.out.println("Connection with plane lost.");
+				planeRouting.cancel();
+				stopThread();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				
+				plane.setCrashedStatus(true);
+				tower.removePlaneFromAllLists(plane);
+				tower.globalTowerRouting();
+				System.out.println("Connection with plane lost.");
+				planeRouting.cancel();				
+				stopThread();
+			}
+		}
+	}
+
+	public synchronized void restart() {
+
+		System.out.println("Restarted");
+		this.notify();
+	}
+	
+	public void setPlaneRouting(PlaneRouting planeRouting){
+		
+		this.planeRouting = planeRouting;
+	}
+
+	/**
+	 * Kill the thread to sleep
+	 */
+	
+	public synchronized void stopThread() {
+
+		try {
+			this.wait();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MessagesLog>
+
+	<last_updated>
+		<Date>February 28, 2012</Date>
+		<Time>11:38</Time>
+	</last_updated>
+
+	<Message>
+		<Type id="HELLO">
+			<Type>HELLO</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority low="4">
+			<Priority>4</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="HELLO">
+			<Type>HELLO</Type>
+		</Type>
+		<Source>Tower</Source>
+		<Destination>ALUYOUPO</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority low="4">
+			<Priority>4</Priority>
+		</Priority>
+
+	</Message>
+
+	<Message>
+		<Type id="SENDRSA">
+			<Type>SENDRSA</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority low="4">
+			<Priority>4</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="KEEPALIVE">
+			<Type>KEEPALIVE</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority low="4">
+			<Priority>4</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="SENDRSA">
+			<Type>SENDRSA</Type>
+		</Type>
+		<Source>Tower</Source>
+		<Destination>ALUYOUPO</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority low="4">
+			<Priority>4</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="LANDING REQUEST">
+			<Type>LANDING REQUEST</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority high="0">
+			<Priority>0</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="DATA">
+			<Type>DATA</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority medium="2">
+			<Priority>2</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="KEEPALIVE">
+			<Type>KEEPALIVE</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority low="4">
+			<Priority>4</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="ROUTING">
+			<Type>ROUTING</Type>
+		</Type>
+		<Source>Tower</Source>
+		<Destination>ALUYOUPO</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority high="0">
+			<Priority>0</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="ROUTING">
+			<Type>ROUTING</Type>
+		</Type>
+		<Source>Tower</Source>
+		<Destination>ALUYOUPO</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority high="0">
+			<Priority>0</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="LANDING REQUEST">
+			<Type>LANDING REQUEST</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority high="0">
+			<Priority>0</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="DATA">
+			<Type>DATA</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority medium="2">
+			<Priority>2</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="KEEPALIVE">
+			<Type>KEEPALIVE</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority low="4">
+			<Priority>4</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="DATA">
+			<Type>DATA</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority medium="2">
+			<Priority>2</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="KEEPALIVE">
+			<Type>KEEPALIVE</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority low="4">
+			<Priority>4</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="DATA">
+			<Type>DATA</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority medium="2">
+			<Priority>2</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="KEEPALIVE">
+			<Type>KEEPALIVE</Type>
+		</Type>
+		<Source>ALUYOUPO</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority low="4">
+			<Priority>4</Priority>
+		</Priority>
+	</Message>
+
+	<Message>
+		<Type id="HELLO">
+			<Type>HELLO</Type>
+		</Type>
+		<Source>N79623N7</Source>
+		<Destination>Tower</Destination>
+		<Date>9/9/11 10:21 AM</Date>
+		<Priority low="4">
+			<Priority>4</Priority>
+		</Priority>
+	</Message>
+
+
+
+</MessagesLog>

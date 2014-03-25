@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/com-itp-planes-sk/!svn/ver/9/com-itp-2012-sg/itp-2012-skgrg/src/gui/given
+END
+AirportGUI.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/com-itp-planes-sk/!svn/ver/6/com-itp-2012-sg/itp-2012-skgrg/src/gui/given/AirportGUI.java
+END
+CircularBuffer.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/gui/given/CircularBuffer.java
+END
+AirportPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/com-itp-planes-sk/!svn/ver/6/com-itp-2012-sg/itp-2012-skgrg/src/gui/given/AirportPanel.java
+END
+PlaneDrawnForGivenGui.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/com-itp-planes-sk/!svn/ver/9/com-itp-2012-sg/itp-2012-skgrg/src/gui/given/PlaneDrawnForGivenGui.java
+END
+JournalGUI.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/gui/given/JournalGUI.java
+END
+DownloadGUI.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/gui/given/DownloadGUI.java
+END
+CircularBufferTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/com-itp-planes-sk/!svn/ver/3/com-itp-2012-sg/itp-2012-skgrg/src/gui/given/CircularBufferTest.java
+END

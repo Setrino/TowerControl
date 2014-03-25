@@ -1,0 +1,300 @@
+package Plane;
+
+import java.awt.Point;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import file.DataFile;
+import message.Message;
+import message.MessageReader;
+import message.MessageSender;
+import message.type.Data;
+import message.type.Hello;
+
+public class PlaneHandler {
+
+	/** The socket. */
+	private Socket socket;
+
+	/** The input stream. */
+	private InputStream inputStream;
+
+	private DataOutputStream dataOutputStream;
+
+	private Plane plane;
+
+	private Timer timer = null;
+
+	private SimpleDateFormat dateFormat = null;
+
+	private MessageReader messageReader = null;
+	private MessageSender messageSender = null;
+
+	private long timeCounterForPlane;
+
+	private PlaneRouting planeRouting = null;
+
+	private long planeCreatedTime = 0l;
+
+	private Date date;
+
+	private Message message;
+	
+	private long messageTimeOut;
+
+	private PlaneConnectionHandler planeConnectionHandler = null;
+
+	private byte[] planeID;
+	private PlaneType planeType;
+	private int initialPosX;
+	private int initialPosY;
+	private byte reserved;
+
+	public PlaneHandler(Socket socket, Plane plane) {
+
+		this.socket = socket;
+		this.plane = plane;
+		planeCreatedTime = System.currentTimeMillis();
+		plane.setPlaneHandler(this);
+		System.out.println("Before");
+		dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+		messageReader = new MessageReader();
+		messageReader.setPlane(plane);
+		System.out.println("In PlaneHandler");
+		establistConnection();
+
+	}
+
+	public synchronized void establistConnection() {
+
+		planeConnectionHandler = new PlaneConnectionHandler(socket);
+	}
+
+	/**
+	 * The Class PlaneConnectionHandler.
+	 */
+	class PlaneConnectionHandler implements Runnable {
+
+		/** The socket. */
+		private Socket socket;
+
+		/**
+		 * Instantiates a new plane connection handler.
+		 * 
+		 * @param socket
+		 *            the socket
+		 */
+		public PlaneConnectionHandler(Socket socket) {
+
+			this.socket = socket;
+
+			if (socket == null) {
+
+				System.out.println("Socket is null");
+
+				try {
+
+					System.out.println("Closing socket");
+					this.socket.close();
+
+				} catch (IOException e) {
+
+					System.out.println("Unable to close socket");
+					e.printStackTrace();
+				}
+			} else {
+
+				handShake();
+				Thread planeThread = new Thread(this);
+				planeThread.start();
+			}
+		}
+
+		@Override
+		public void run() {
+
+			while (true) {
+
+				try {
+
+					while (inputStream.available() > 0) {
+
+						messageReader.readMessage(inputStream);
+					}
+
+					Thread.sleep(100);
+
+				} catch (InterruptedException e) {
+
+					e.printStackTrace();
+				} catch (IOException e) {
+
+					stopThread();
+					System.out.println("Plane Closed");
+				}
+
+			}
+		}
+
+		/** In case of MayDay ignore anything coming from plane */
+
+		/** Restart the connection with the Plane */
+
+		synchronized public void restart() {
+
+			this.notify();
+		}
+
+		/**
+		 * Handshake with plane, setPlaneID, PlaneName
+		 */
+		private void handShake() {
+
+			timeCounterForPlane = System.currentTimeMillis();
+			date = new Date(timeCounterForPlane);
+			System.out.println("Handshake with Plane at "
+					+ dateFormat.format(date));
+			try {
+				dataOutputStream = new DataOutputStream(
+						socket.getOutputStream());
+
+				inputStream = new DataInputStream(socket.getInputStream());
+				messageSender = new MessageSender(dataOutputStream);
+				messageSender.start();
+				plane.setMessageSender(messageSender);
+				System.out.println("Connected and Established Input/Output"
+						+ " MessageReader/MessageSender");
+				System.out.println(planeID + " " + initialPosX + " "
+						+ initialPosY + " " + reserved);
+				message = new Hello(planeID, initialPosX, initialPosY, reserved);
+				message.sendMessage(dataOutputStream);
+				dataOutputStream.flush();
+
+				System.out.println("Sent");
+
+				do {
+					sleep(100);
+				} while (inputStream.available() == 0);
+
+				System.out.println("Passed with " + inputStream.available());
+
+				if (inputStream.available() > 0) {
+
+					System.out.println("Here");
+
+					message = messageReader.readMessage(inputStream);
+
+					if (message instanceof Hello) {
+
+						Hello hello = (Hello) message;
+
+						if (planeID != hello.getPlaneID()
+								&& initialPosX != hello.getPosX()
+								&& initialPosY != hello.getPosY()
+								&& reserved != hello.getReserved()) {
+
+							System.out.println("Received bad Hello");
+							stopThread();
+
+						} else {
+
+							System.out.println("Received Correct Hello");
+
+							DataFile dataFile = new DataFile(
+									planeType.toString() + ".txt");
+
+							message = new Data(planeID, 0, initialPosX,
+									initialPosY, dataFile.getHash(),
+									dataFile.getFormat(), dataFile.getSize(),
+									dataFile.getPacket(0, dataFile.getSize()));
+							((Data) message).sendMessage(dataOutputStream);
+							dataOutputStream.flush();
+
+							planeRouting = new PlaneRouting(planeCreatedTime,
+									plane.getPlaneUpdateInterval(), plane,
+									planeID);
+							messageReader.setPlaneRouting(planeRouting);
+							planeRouting.setCurrentPlanePosition(new Point(
+									initialPosX, initialPosY));
+							timer = new Timer();
+							timer.schedule(planeRouting, 0l,
+									plane.getPlaneUpdateInterval());
+						}
+					}
+				}
+			} catch (NullPointerException e) {
+
+				System.out.println("Received a Null Pointer Exception");
+				stopThread();
+
+			} catch (IOException e) {
+
+				e.printStackTrace();
+				stopThread();
+
+			}
+		}
+	}
+
+	public synchronized void sleep(long time) {
+
+		try {
+			this.wait(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public synchronized void stopThread() {
+
+		try {
+			plane.setCrashedStatus(true);
+			socket.close();
+			System.out.println("Connection with plane lost.");
+			messageSender.stopThread();	
+			planeConnectionHandler.wait();
+			this.wait();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void setPlaneID(byte[] planeID) {
+
+		this.planeID = planeID;
+	}
+
+	public void setInitialPosX(int initialPosX) {
+		this.initialPosX = initialPosX;
+	}
+
+	public void setInitialPosY(int initialPosY) {
+		this.initialPosY = initialPosY;
+	}
+
+	public void setReserved(byte reserved) {
+		this.reserved = reserved;
+	}
+
+	public void setPlaneType(PlaneType planeType) {
+
+		this.planeType = planeType;
+	}
+
+	public void setMessageTimeOut(long messageTimeOut) {
+
+		this.messageTimeOut = messageTimeOut;
+	}
+	
+	public long getMessageTimeOut() {
+		return messageTimeOut;
+	}
+}

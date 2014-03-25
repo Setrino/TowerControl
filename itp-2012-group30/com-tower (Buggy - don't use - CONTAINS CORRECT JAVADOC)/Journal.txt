@@ -1,0 +1,47 @@
+Sergei Kostevitch  202456
+Gabriel Gomes      195945
+
+
+
+
+				        | Journal de bord |
+					-------------------
+
+
+
+Mardi 21 février 2012 :
+
+Début du projet, mise en place des bases (SVN, dossiers racine).
+Prise de connaissance du thème du projet, lecture du descriptif plusieurs fois,
+afin de se faire une vision globale du sujet.
+
+Codage de l'ITP-01 et achèvement durant la semaine. Pas de problèmes particuliers rencontrés.
+
+
+
+Mardi 28 février 2012 :
+
+Lecture de l'ITP-02. Prise de connaissance de ce qui est demandé.
+Codage de tous les messages par Sergei et codage de la classe Tower
+par Gabriel.
+
+Questions sur la classe "Messages" :
+
+1. Oui, c'est une bonne idée d'avoir une super-classe Messages car ainsi
+nous pouvons utiliser le polymorphisme. On crée un tableau de type Messages et
+on stocke tous les différents messages là-dedans. (Pas besoin de créer une variable
+différente pour chaque message de type différent.
+
+2. La super-Classe Messages est abstraite car elle ne sera jamais appelée.
+Elle regroupe un ensemble de messages qui seront utilisés.
+Par contre un objet de type Message ne sera jamais utilisé.
+
+Codage de la partie D3 ("Envoi" des messages) durant la semaine.
+Attente du test fourni pour coder cette partie.
+
+
+
+Mardi 6 mars 2012 :
+
+Prise de connaissance de l'ITP-03.
+Codage du cryptage et décryptage des messages.
